@@ -9,10 +9,10 @@
 
 void ConnectMenu::optionsMenu() {
     options = {
-        {"Send File", [=]() { FileSharing().sendFile(); }        },
-        {"Recv File", [=]() { FileSharing().receiveFile(); }     },
-        {"Send Cmds", [=]() { EspSerialCmd().sendCommands(); }   },
-        {"Recv Cmds", [=]() { EspSerialCmd().receiveCommands(); }},
+        {"Enviar archivo", [=]() { FileSharing().sendFile(); }        },
+        {"Recibir archivo", [=]() { FileSharing().receiveFile(); }     },
+        {"Enviar comandos", [=]() { EspSerialCmd().sendCommands(); }   },
+        {"Recibir comandos", [=]() { EspSerialCmd().receiveCommands(); }},
     };
     addOptionToMainMenu();
 

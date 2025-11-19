@@ -53,7 +53,7 @@ std::vector<Option> getScriptsOptionsList() {
 void ScriptsMenu::optionsMenu() {
     options = getScriptsOptionsList();
 
-    options.push_back({"Load...", run_bjs_script});
+    options.push_back({"Cargar...", run_bjs_script});
     addOptionToMainMenu();
 
     loopOptions(options, MENU_TYPE_SUBMENU, "Scripts");

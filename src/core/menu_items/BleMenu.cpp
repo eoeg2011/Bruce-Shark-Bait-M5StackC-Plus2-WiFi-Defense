@@ -20,20 +20,20 @@ void BleMenu::optionsMenu() {
                            }});
     }
 
-    options.push_back({"Media Cmds", [=]() { MediaCommands(hid_ble, true); }});
+    options.push_back({"Comandos multimedia", [=]() { MediaCommands(hid_ble, true); }});
 #if !defined(LITE_VERSION)
-    options.push_back({"BLE Scan", ble_scan});
+    options.push_back({"Escanear BLE", ble_scan});
     options.push_back({"iBeacon", [=]() { ibeacon(); }});
     options.push_back({"Bad BLE", [=]() { ducky_setup(hid_ble, true); }});
 #endif
-    options.push_back({"BLE Keyboard", [=]() { ducky_keyboard(hid_ble, true); }});
+    options.push_back({"Teclado BLE", [=]() { ducky_keyboard(hid_ble, true); }});
     options.push_back({"Applejuice", lambdaHelper(aj_adv, 0)});
     options.push_back({"SourApple", lambdaHelper(aj_adv, 1)});
-    options.push_back({"Windows Spam", lambdaHelper(aj_adv, 2)});
-    options.push_back({"Samsung Spam", lambdaHelper(aj_adv, 3)});
-    options.push_back({"Android Spam", lambdaHelper(aj_adv, 4)});
-    options.push_back({"Spam All", lambdaHelper(aj_adv, 5)});
-    options.push_back({"Spam Custom", lambdaHelper(aj_adv, 6)});
+    options.push_back({"Spam Windows", lambdaHelper(aj_adv, 2)});
+    options.push_back({"Spam Samsung", lambdaHelper(aj_adv, 3)});
+    options.push_back({"Spam Android", lambdaHelper(aj_adv, 4)});
+    options.push_back({"Spam todo", lambdaHelper(aj_adv, 5)});
+    options.push_back({"Spam personalizado", lambdaHelper(aj_adv, 6)});
     options.push_back({"Ninebot", [=]() { BLENinebot(); }});
     addOptionToMainMenu();
 

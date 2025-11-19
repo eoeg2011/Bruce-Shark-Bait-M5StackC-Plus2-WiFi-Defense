@@ -42,12 +42,12 @@ void RFIDMenu::optionsMenu() {
 
 void RFIDMenu::configMenu() {
     options = {
-        {"RFID Module", setRFIDModuleMenu       },
-        {"Add MIF Key", addMifareKeyMenu        },
-        {"Back",        [=]() { optionsMenu(); }},
+        {"Módulo RFID", setRFIDModuleMenu       },
+        {"Añadir clave MIF", addMifareKeyMenu   },
+        {"Atrás",        [=]() { optionsMenu(); }},
     };
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "RFID Config");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Config RFID");
 }
 void RFIDMenu::drawIconImg() {
     drawImg(

@@ -11,73 +11,73 @@
 
 void ConfigMenu::optionsMenu() {
     options = {
-        {"Brightness", setBrightnessMenu},
-        {"Dim Time", setDimmerTimeMenu},
-        {"Orientation", lambdaHelper(gsetRotation, true)},
-        {"UI Color", setUIColor},
-        {"UI Theme", setTheme},
-        {String("InstaBoot: " + String(bruceConfig.instantBoot ? "ON" : "OFF")),
+        {"Brillo", setBrightnessMenu},
+        {"Atenuación", setDimmerTimeMenu},
+        {"Orientación", lambdaHelper(gsetRotation, true)},
+        {"Color de UI", setUIColor},
+        {"Tema de UI", setTheme},
+        {String("Inicio rápido: " + String(bruceConfig.instantBoot ? "ON" : "OFF")),
          [=]() {
              bruceConfig.instantBoot = !bruceConfig.instantBoot;
              bruceConfig.saveFile();
          }},
 #ifdef HAS_RGB_LED
-        {"LED Color",
+        {"Color LED",
          [=]() {
              beginLed();
              setLedColorConfig();
          }},
-        {"LED Effect",
+        {"Efecto LED",
          [=]() {
              beginLed();
              setLedEffectConfig();
          }},
-        {"LED Brightness",
+        {"Brillo LED",
          [=]() {
              beginLed();
              setLedBrightnessConfig();
          }},
-        {"Led Blink On/Off", setLedBlinkConfig},
+        {"Parpadeo LED On/Off", setLedBlinkConfig},
 #endif
-        {"Sound On/Off", setSoundConfig},
+        {"Sonido On/Off", setSoundConfig},
 #if defined(HAS_NS4168_SPKR)
-        {"Sound Volume", setSoundVolume},
+        {"Volumen de sonido", setSoundVolume},
 #endif
-        {"Startup WiFi", setWifiStartupConfig},
-        {"Startup App", setStartupApp},
-        {"Hide/Show Apps", []() { mainMenu.hideAppsMenu(); }},
-        {"Network Creds", setNetworkCredsMenu},
-        {"Clock", setClock},
-        {"Sleep", setSleepMode},
-        {"Factory Reset", [=]() { bruceConfig.factoryReset(); }},
-        {"Restart", [=]() { ESP.restart(); }},
+        {"WiFi al arrancar", setWifiStartupConfig},
+        {"App al arrancar", setStartupApp},
+        {"Ocultar/Mostrar apps", []() { mainMenu.hideAppsMenu(); }},
+        {"Credenciales de red", setNetworkCredsMenu},
+        {"Reloj", setClock},
+        {"Suspensión", setSleepMode},
+        {"Restablecer fábrica", [=]() { bruceConfig.factoryReset(); }},
+        {"Reiniciar", [=]() { ESP.restart(); }},
     };
 
-    options.push_back({"Turn-off", powerOff});
-    options.push_back({"Deep Sleep", goToDeepSleep});
+    options.push_back({"Apagar", powerOff});
+    options.push_back({"Sueño profundo", goToDeepSleep});
 
-    if (bruceConfig.devMode) options.push_back({"Device Pin setting", [=]() { devMenu(); }});
+    if (bruceConfig.devMode) options.push_back({"Configurar pines del dispositivo", [=]() { devMenu(); }});
 
-    options.push_back({"About", showDeviceInfo});
+    options.push_back({"Acerca de", showDeviceInfo});
     addOptionToMainMenu();
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "Config");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Configuración");
 }
 
 void ConfigMenu::devMenu() {
     options = {
-        {"I2C Finder",  find_i2c_addresses                                   },
-        {"CC1101 Pins", [=]() { setSPIPinsMenu(bruceConfigPins.CC1101_bus); }},
-        {"NRF24  Pins", [=]() { setSPIPinsMenu(bruceConfigPins.NRF24_bus); } },
-        {"SDCard Pins", [=]() { setSPIPinsMenu(bruceConfigPins.SDCARD_bus); }},
+        {"Buscar I2C",  find_i2c_addresses                                   },
+        {"Pines CC1101", [=]() { setSPIPinsMenu(bruceConfigPins.CC1101_bus); }},
+        {"Pines NRF24", [=]() { setSPIPinsMenu(bruceConfigPins.NRF24_bus); } },
+        {"Pines SDCard", [=]() { setSPIPinsMenu(bruceConfigPins.SDCARD_bus); }},
         //{"SYSI2C Pins", [=]() { setI2CPinsMenu(bruceConfigPins.sys_i2c); }   },
-        {"I2C Pins",    [=]() { setI2CPinsMenu(bruceConfigPins.i2c_bus); }   },
-        {"UART Pins",   [=]() { setUARTPinsMenu(bruceConfigPins.uart_bus); } },
-        {"GPS Pins",    [=]() { setUARTPinsMenu(bruceConfigPins.gps_bus); }  },
-        {"Back",        [=]() { optionsMenu(); }                             },
+        {"Pines I2C",    [=]() { setI2CPinsMenu(bruceConfigPins.i2c_bus); }   },
+        {"Pines UART",   [=]() { setUARTPinsMenu(bruceConfigPins.uart_bus); } },
+        {"Pines GPS",    [=]() { setUARTPinsMenu(bruceConfigPins.gps_bus); }  },
+        {"Atrás",        [=]() { optionsMenu(); }                             },
     };
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "Dev Mode");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Modo desarrollador");
 }
 void ConfigMenu::drawIconImg() {
     drawImg(

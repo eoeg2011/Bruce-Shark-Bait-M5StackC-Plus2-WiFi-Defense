@@ -25,13 +25,13 @@ void IRMenu::optionsMenu() {
 
 void IRMenu::configMenu() {
     options = {
-        {"Ir TX Pin", lambdaHelper(gsetIrTxPin, true)},
-        {"Ir RX Pin", lambdaHelper(gsetIrRxPin, true)},
-        {"Ir TX Repeats", setIrTxRepeats},
-        {"Back", [=]() { optionsMenu(); }},
+        {"Pin TX IR", lambdaHelper(gsetIrTxPin, true)},
+        {"Pin RX IR", lambdaHelper(gsetIrRxPin, true)},
+        {"Repeticiones TX IR", setIrTxRepeats},
+        {"Atrás", [=]() { optionsMenu(); }},
     };
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "IR Config");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Config IR");
 }
 void IRMenu::drawIconImg() {
     drawImg(

@@ -5,7 +5,7 @@
 
 class ConnectMenu : public MenuItemInterface {
 public:
-    ConnectMenu() : MenuItemInterface("Connect") {}
+    ConnectMenu() : MenuItemInterface("Conectar") {}
 
     void optionsMenu(void);
     void drawIcon(float scale);

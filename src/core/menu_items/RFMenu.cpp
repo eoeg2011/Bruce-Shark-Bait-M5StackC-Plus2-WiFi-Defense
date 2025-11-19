@@ -39,14 +39,14 @@ void RFMenu::optionsMenu() {
 
 void RFMenu::configMenu() {
     options = {
-        {"RF TX Pin", lambdaHelper(gsetRfTxPin, true)},
-        {"RF RX Pin", lambdaHelper(gsetRfRxPin, true)},
-        {"RF Module", setRFModuleMenu},
-        {"RF Frequency", setRFFreqMenu},
-        {"Back", [=]() { optionsMenu(); }},
+        {"Pin TX RF", lambdaHelper(gsetRfTxPin, true)},
+        {"Pin RX RF", lambdaHelper(gsetRfRxPin, true)},
+        {"Módulo RF", setRFModuleMenu},
+        {"Frecuencia RF", setRFFreqMenu},
+        {"Atrás", [=]() { optionsMenu(); }},
     };
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "RF Config");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Config RF");
 }
 void RFMenu::drawIconImg() {
     drawImg(

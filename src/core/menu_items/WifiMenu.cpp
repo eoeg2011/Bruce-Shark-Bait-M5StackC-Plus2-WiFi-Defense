@@ -37,10 +37,10 @@ void WifiMenu::optionsMenu() {
     if (isWebUIActive) {
         drawMainBorderWithTitle("WiFi", true);
         padprintln("");
-        padprintln("Starting a Wifi function will probably make the WebUI stop working");
+        padprintln("Iniciar una función WiFi puede hacer que WebUI deje de funcionar");
         padprintln("");
-        padprintln("Sel: to continue");
-        padprintln("Any key: to Menu");
+        padprintln("Sel: continuar");
+        padprintln("Cualquier tecla: menú");
         while (1) {
             if (check(SelPress)) { break; }
             if (check(AnyKeyPress)) { return; }
@@ -49,20 +49,20 @@ void WifiMenu::optionsMenu() {
     }
     if (!wifiConnected) {
         options = {
-            {"Connect Wifi", lambdaHelper(wifiConnectMenu, WIFI_STA)},
-            {"WiFi AP", [=]() {
+            {"Conectar WiFi", lambdaHelper(wifiConnectMenu, WIFI_STA)},
+            {"Punto de acceso WiFi", [=]() {
                  wifiConnectMenu(WIFI_AP);
                  displayInfo("pwd: " + bruceConfig.wifiAp.pwd, true);
              }},
         };
     } else {
         options = {
-            {"Disconnect", wifiDisconnect}
+            {"Desconectar", wifiDisconnect}
         };
-        if (WiFi.getMode() == WIFI_MODE_STA) options.push_back({"AP info", displayAPInfo});
+        if (WiFi.getMode() == WIFI_MODE_STA) options.push_back({"Info del AP", displayAPInfo});
     }
-    options.push_back({"Wifi Atks", wifi_atk_menu});
-    options.push_back({"Evil Portal", [=]() {
+    options.push_back({"Ataques WiFi", wifi_atk_menu});
+    options.push_back({"Portal malicioso", [=]() {
                            if (isWebUIActive || server) {
                                stopWebUi();
                                wifiDisconnect();
@@ -70,8 +70,8 @@ void WifiMenu::optionsMenu() {
                            EvilPortal();
                        }});
     // options.push_back({"ReverseShell", [=]()       { ReverseShell(); }});
-    options.push_back({"Listen TCP", listenTcpPort});
-    options.push_back({"Client TCP", clientTCP});
+    options.push_back({"Escuchar TCP", listenTcpPort});
+    options.push_back({"Cliente TCP", clientTCP});
 #ifndef LITE_VERSION
     options.push_back({"TelNET", telnet_setup});
     options.push_back({"SSH", lambdaHelper(ssh_setup, String(""))});
@@ -79,13 +79,13 @@ void WifiMenu::optionsMenu() {
         std::vector<Option> snifferOptions;
 
 
-            snifferOptions.push_back({"Raw Sniffer",    sniffer_setup});
-            snifferOptions.push_back({"Probe Sniffer",  karma_setup});
-            snifferOptions.push_back({"Back",      [=]()  {optionsMenu(); }});
+            snifferOptions.push_back({"Sniffer bruto",    sniffer_setup});
+            snifferOptions.push_back({"Sniffer de probes",  karma_setup});
+            snifferOptions.push_back({"Atrás",      [=]()  {optionsMenu(); }});
         
         loopOptions(snifferOptions, MENU_TYPE_SUBMENU, "Sniffers");
     }});
-    options.push_back({"Scan Hosts", [=]() {
+    options.push_back({"Escanear hosts", [=]() {
                            bool doScan = true;
                            if (!wifiConnected) doScan = wifiConnectMenu();
 
@@ -99,10 +99,10 @@ void WifiMenu::optionsMenu() {
                                ARPScanner{esp_netinterface};
                            }
                        }});
-    options.push_back({"Wireguard", wg_setup});
+    options.push_back({"WireGuard", wg_setup});
     options.push_back({"Brucegotchi", brucegotchi_start});
 #endif
-    options.push_back({"Config", [=]() { configMenu(); }});
+    options.push_back({"Configurar", [=]() { configMenu(); }});
     addOptionToMainMenu();
 
     loopOptions(options, MENU_TYPE_SUBMENU, "WiFi");
@@ -110,13 +110,13 @@ void WifiMenu::optionsMenu() {
 
 void WifiMenu::configMenu() {
     options = {
-        {"Add Evil Wifi",    addEvilWifiMenu         },
-        {"Remove Evil Wifi", removeEvilWifiMenu      },
-        {"Change MAC", wifiMACMenu      },
-        {"Back",             [=]() { optionsMenu(); }},
+        {"Añadir Evil WiFi",    addEvilWifiMenu         },
+        {"Eliminar Evil WiFi", removeEvilWifiMenu      },
+        {"Cambiar MAC", wifiMACMenu      },
+        {"Atrás",             [=]() { optionsMenu(); }},
     };
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "WiFi Config");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Config WiFi");
 }
 void WifiMenu::drawIconImg() {
     drawImg(

@@ -9,8 +9,8 @@
 void GpsMenu::optionsMenu() {
     options = {
         {"Wardriving",  [=]() { Wardriving(); }},
-        {"GPS Tracker", [=]() { GPSTracker(); }},
-        {"Config",      [=]() { configMenu(); }},
+        {"Rastreador GPS", [=]() { GPSTracker(); }},
+        {"Configurar",      [=]() { configMenu(); }},
     };
     addOptionToMainMenu();
 
@@ -20,12 +20,12 @@ void GpsMenu::optionsMenu() {
 
 void GpsMenu::configMenu() {
     options = {
-        {"Baudrate", setGpsBaudrateMenu                                 },
-        {"GPS Pins", [=]() { setUARTPinsMenu(bruceConfigPins.gps_bus); }},
-        {"Back",     [=]() { optionsMenu(); }                           },
+        {"Baudios", setGpsBaudrateMenu                                   },
+        {"Pines GPS", [=]() { setUARTPinsMenu(bruceConfigPins.gps_bus); }},
+        {"Atrás",     [=]() { optionsMenu(); }                           },
     };
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "GPS Config");
+    loopOptions(options, MENU_TYPE_SUBMENU, "Config GPS");
 }
 void GpsMenu::drawIconImg() {
     drawImg(

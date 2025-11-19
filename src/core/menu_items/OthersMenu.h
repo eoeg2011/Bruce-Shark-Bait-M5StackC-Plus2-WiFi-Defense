@@ -5,7 +5,7 @@
 
 class OthersMenu : public MenuItemInterface {
 public:
-    OthersMenu() : MenuItemInterface("Others") {}
+    OthersMenu() : MenuItemInterface("Otros") {}
 
     void optionsMenu(void);
     void drawIcon(float scale);

@@ -12,28 +12,28 @@
 #include "modules/others/tururururu.h"
 
 void OthersMenu::optionsMenu() {
-    options = {
-        {"QRCodes",      qrcode_menu                              },
+        options = {
+        {"Códigos QR",   qrcode_menu                              },
         {"Megalodon",    shark_setup                              },
 #ifdef MIC_SPM1423
-        {"Mic Spectrum", mic_test                                 },
-        {"Mic Record",   mic_record                               }, //@deveclipse
+        {"Espectro micrófono", mic_test                           },
+        {"Grabar micrófono",   mic_record                         }, //@deveclipse
 #endif
         {"BadUSB",       [=]() { ducky_setup(hid_usb, false); }   },
-        {"USB Keyboard", [=]() { ducky_keyboard(hid_usb, false); }},
+        {"Teclado USB",  [=]() { ducky_keyboard(hid_usb, false); }},
 #ifdef USB_as_HID
         {"Clicker",      clicker_setup                            },
 #endif
 #ifndef LITE_VERSION
-        {"Openhaystack", openhaystack_setup                       },
-        {"Interpreter",  run_bjs_script                           },
+        {"OpenHaystack", openhaystack_setup                       },
+        {"Intérprete",   run_bjs_script                           },
 #endif
         {"iButton",      setup_ibutton                            },
-        {"Timer",        [=]() { Timer(); }                       },
+        {"Temporizador", [=]() { Timer(); }                       },
     };
     addOptionToMainMenu();
 
-    loopOptions(options, MENU_TYPE_SUBMENU, "Others");
+        loopOptions(options, MENU_TYPE_SUBMENU, "Otros");
 }
 void OthersMenu::drawIconImg() {
     drawImg(
