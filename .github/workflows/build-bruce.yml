@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 env:
   PLATFORMIO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -41,7 +44,7 @@ jobs:
         run: |
           pio run -e m5stack-cplus2 -v | tee build.log
 
-      - name: Upload firmware
+      - name: Upload firmware (artifact)
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -56,3 +59,15 @@ jobs:
           name: build-logs
           path: build.log
           retention-days: 7
+
+      - name: Create/Update GitHub Release (latest)
+        if: success()
+        uses: ncipollo/release-action@v1
+        with:
+          tag: latest
+          name: Latest Firmware (m5stack-cplus2)
+          allowUpdates: true
+          replacesArtifacts: true
+          artifactErrorsFailBuild: false
+          artifacts: .pio/build/m5stack-cplus2/firmware.bin
+          token: ${{ secrets.GITHUB_TOKEN }}
