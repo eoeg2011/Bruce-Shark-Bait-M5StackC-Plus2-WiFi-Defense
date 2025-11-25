@@ -1,0 +1,48 @@
+name: Build M5StickC Plus2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: |
+          pip install --upgrade pip
+          pip install platformio
+
+      - name: Prepare dependencies (optional)
+        run: |
+          pio pkg update
+
+      - name: Build for m5stack-cplus2
+        run: |
+          pio run -e m5stack-cplus2
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-m5stack-cplus2
+          path: .pio/build/m5stack-cplus2/firmware.bin
+
+      - name: Publish release latest
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          tag: latest
+          name: Latest Build
+          body: |
+            Automated build for M5StickC Plus2.
+          artifacts: .pio/build/m5stack-cplus2/firmware.bin
+          artifactContentType: application/octet-stream
